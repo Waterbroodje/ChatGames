@@ -90,4 +90,12 @@ public final class Main extends JavaPlugin {
         }
         return shuffled;
     }
+
+    public String reverseString(String string) {
+        StringBuilder output = new StringBuilder();
+        output.append(string);
+        output.reverse();
+
+        return output.toString();
+    }
 }
