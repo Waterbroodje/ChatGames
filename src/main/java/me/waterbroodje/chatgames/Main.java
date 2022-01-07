@@ -31,50 +31,45 @@ public final class Main extends JavaPlugin {
         new BukkitRunnable() {
             @Override
             public void run() {
+                isGameActive = true;
+                String key = getRandomGame();
+                type = getConfig().getString("games." + key + ".type");
+                String question = getConfig().getString("games." + key + ".question");
+                if (type.equalsIgnoreCase("wordshuffle")) {
+                    answer = getConfig().getString("games." + key + ".word");
+                    Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', question
+                            .replace("%prefix%", prefix)
+                            .replace("%word%", shuffleString(getConfig().getString("games." + key + ".word")))
+                    ));
+                } else if (type.equalsIgnoreCase("typeword")) {
+                    answer = getConfig().getString("games." + key + ".word");
+                    Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', question
+                            .replace("%prefix%", prefix)
+                            .replace("%word%", getConfig().getString("games." + key + ".word"))
+                    ));
+                } else if (type.equalsIgnoreCase("question")) {
+                    answer = getConfig().getString("games." + key + ".answer");
+                    Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', question
+                            .replace("%prefix%", prefix)
+                    ));
+                }
+                before = key;
                 new BukkitRunnable() {
                     @Override
                     public void run() {
-                        isGameActive = true;
-                        String key = getRandomGame();
-                        type = getConfig().getString("games." + key + ".type");
-                        String question = getConfig().getString("games." + key + ".question");
-                        if (type.equalsIgnoreCase("wordshuffle")) {
-                            answer = getConfig().getString("games." + key + ".word");
-                            Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', question
+                        if (isGameActive) {
+                            isGameActive = false;
+                            Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("no-winner")
                                     .replace("%prefix%", prefix)
-                                    .replace("%word%", shuffleString(getConfig().getString("games." + key + ".word")))
+                                    .replace("%answer%", answer)
                             ));
-                        } else if (type.equalsIgnoreCase("typeword")) {
-                            answer = getConfig().getString("games." + key + ".word");
-                            Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', question
-                                    .replace("%prefix%", prefix)
-                                    .replace("%word%", getConfig().getString("games." + key + ".word"))
-                            ));
-                        } else if (type.equalsIgnoreCase("question")) {
-                            answer = getConfig().getString("games." + key + ".answer");
-                            Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', question
-                                    .replace("%prefix%", prefix)
-                            ));
+                            answer = "null";
+                            type = "null";
                         }
-                        before = key;
-                        new BukkitRunnable() {
-                            @Override
-                            public void run() {
-                                if (isGameActive) {
-                                    isGameActive = false;
-                                    Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("no-winner")
-                                            .replace("%prefix%", prefix)
-                                            .replace("%answer%", answer)
-                                    ));
-                                    answer = "null";
-                                    type = "null";
-                                }
-                            }
-                        }.runTaskLater(Main.getInstance(),20 * 30);
                     }
-                }.runTaskTimer(Main.getInstance(), 0L, 20 * getConfig().getInt("delay"));
+                }.runTaskLater(Main.getInstance(),20 * 30);
             }
-        }.runTaskLater(Main.getInstance(), 20 * getConfig().getInt("delay"));
+        }.runTaskTimer(Main.getInstance(), 20 * getConfig().getInt("delay"), 20 * getConfig().getInt("delay"));
     }
 
     public String getRandomGame() {
