@@ -1,0 +1,25 @@
+# ChatGames config.yml created by version 1.0.0
+
+prefix: "&e&lChatGames &8&l|"
+
+no-winner: "%prefix% &fNo one has typed &e%answer% &fon time."
+
+reward-message: "%prefix% &e%player% &fhas given the correct answer."
+
+# You can change the "game-x" to anything you want.
+games:
+  game-1:
+    type: "wordshuffle"
+    question: "%prefix% &fSolve &e%word% &fand get a reward"
+    word: "apple"
+  game-2:
+    type: "typeword"
+    question: "%prefix% &fType &e%word% &fand get a reward"
+    word: "house"
+  game-3:
+    type: "question"
+    question: "%prefix% &fSolve &e141 * 2 / 4 &fand get a reward"
+    answer: "70.5"
+
+# The amount of seconds before a new game starts
+delay: 60
