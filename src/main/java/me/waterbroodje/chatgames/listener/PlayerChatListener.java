@@ -14,13 +14,10 @@ public class PlayerChatListener implements Listener {
         if (Main.isGameActive) {
             String message = e.getMessage();
             if (message.equalsIgnoreCase(Main.answer)) {
-                // user won
-
                 Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', Main.getInstance().getConfig().getString("reward-message")
                         .replace("%prefix%", Main.prefix)
                         .replace("%player%", e.getPlayer().getName()))
                 );
-
                 Main.isGameActive = false;
                 Main.answer = "null";
                 Main.type = "null";

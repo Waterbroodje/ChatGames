@@ -25,22 +25,16 @@ public final class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-
         this.saveDefaultConfig();
-
         Bukkit.getPluginManager().registerEvents(new PlayerChatListener(), this);
-
         prefix = ChatColor.translateAlternateColorCodes('&', getConfig().getString("prefix"));
-
         new BukkitRunnable() {
             @Override
             public void run() {
                 new BukkitRunnable() {
                     @Override
                     public void run() {
-                        // create game
                         isGameActive = true;
-
                         String key = getRandomGame();
                         type = getConfig().getString("games." + key + ".type");
                         String question = getConfig().getString("games." + key + ".question");
@@ -50,14 +44,12 @@ public final class Main extends JavaPlugin {
                                     .replace("%prefix%", prefix)
                                     .replace("%word%", shuffleString(getConfig().getString("games." + key + ".word")))
                             ));
-
                         } else if (type.equalsIgnoreCase("typeword")) {
                             answer = getConfig().getString("games." + key + ".word");
                             Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', question
                                     .replace("%prefix%", prefix)
                                     .replace("%word%", getConfig().getString("games." + key + ".word"))
                             ));
-
                         } else if (type.equalsIgnoreCase("question")) {
                             answer = getConfig().getString("games." + key + ".answer");
                             Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', question
@@ -65,7 +57,6 @@ public final class Main extends JavaPlugin {
                             ));
                         }
                         before = key;
-
                         new BukkitRunnable() {
                             @Override
                             public void run() {
