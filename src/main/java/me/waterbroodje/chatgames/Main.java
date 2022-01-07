@@ -52,6 +52,11 @@ public final class Main extends JavaPlugin {
                     Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', question
                             .replace("%prefix%", prefix)
                     ));
+                } else if (type.equalsIgnoreCase("reverse")) {
+                    answer = getConfig().getString("games." + key + ".word");
+                    Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', question
+                            .replace("%prefix%", prefix)
+                    ));
                 }
                 before = key;
                 new BukkitRunnable() {
