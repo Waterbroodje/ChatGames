@@ -20,6 +20,10 @@ games:
     type: "question"
     question: "%prefix% &fSolve &e141 * 2 / 4 &fand get a reward"
     answer: "70.5"
+  game-4:
+    type: "backwards"
+    question: "%prefix% &fSolve &e%word% and get a reward"
+    word: "banana"
 
 # The amount of seconds before a new game starts
 delay: 60
