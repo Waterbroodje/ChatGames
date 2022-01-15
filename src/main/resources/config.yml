@@ -10,20 +10,20 @@ reward-message: "%prefix% &e%player% &fhas given the correct answer."
 games:
   game-1:
     type: "wordshuffle"
-    question: "%prefix% &fSolve &e%word% &fand get a reward"
+    question: "%prefix% &fSolve &e%word%"
     word: "apple"
   game-2:
     type: "typeword"
-    question: "%prefix% &fType &e%word% &fand get a reward"
+    question: "%prefix% &fType &e%word%"
     word: "house"
   game-3:
     type: "question"
-    question: "%prefix% &fSolve &e141 * 2 / 4 &fand get a reward"
+    question: "%prefix% &fSolve &e141 * 2 / 4"
     answer: "70.5"
   game-4:
     type: "backwards"
-    question: "%prefix% &fSolve &e%word% and get a reward"
+    question: "%prefix% &fSolve &e%word%"
     word: "banana"
 
 # The amount of seconds before a new game starts
-delay: 60
+delay: 600

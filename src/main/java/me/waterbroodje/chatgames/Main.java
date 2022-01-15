@@ -28,6 +28,7 @@ public final class Main extends JavaPlugin {
         this.saveDefaultConfig();
         Bukkit.getPluginManager().registerEvents(new PlayerChatListener(), this);
         prefix = ChatColor.translateAlternateColorCodes('&', getConfig().getString("prefix"));
+
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -35,6 +36,7 @@ public final class Main extends JavaPlugin {
                 String key = getRandomGame();
                 type = getConfig().getString("games." + key + ".type");
                 String question = getConfig().getString("games." + key + ".question");
+
                 if (type.equalsIgnoreCase("wordshuffle")) {
                     answer = getConfig().getString("games." + key + ".word");
                     Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', question
@@ -56,9 +58,12 @@ public final class Main extends JavaPlugin {
                     answer = getConfig().getString("games." + key + ".word");
                     Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', question
                             .replace("%prefix%", prefix)
+                            .replace("%word%", reverseString(getConfig().getString("games." + key + ".word")))
                     ));
                 }
+
                 before = key;
+
                 new BukkitRunnable() {
                     @Override
                     public void run() {
@@ -90,9 +95,11 @@ public final class Main extends JavaPlugin {
         List<String> letters = Arrays.asList(string.split(""));
         Collections.shuffle(letters);
         String shuffled = "";
+
         for (String letter : letters) {
             shuffled += letter;
         }
+
         return shuffled;
     }
 
